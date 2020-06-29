@@ -1,4 +1,4 @@
 - name: hello-world
   templates:
-  - https://github.com/open-integration/oictl-templates/blob/69bbf61fda661256df18c6da18d4ec9fac658a58/pipeline/hello-world/main.go.tmpl
+  - https://raw.githubusercontent.com/open-integration/oictl-templates/69bbf61fda661256df18c6da18d4ec9fac658a58/pipeline/hello-world/main.go.tmpl
   default: true
