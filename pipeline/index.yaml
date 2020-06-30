@@ -4,10 +4,10 @@ items:
 - name: hello-world
   pre:
   - go mod init {{ .metadata.name }} || true
+  post:
+  - go mod tidy
+  - gofmt -l -w .
   templates:
   - file: main.go
     link: https://raw.githubusercontent.com/open-integration/oictl-templates/69bbf61fda661256df18c6da18d4ec9fac658a58/pipeline/hello-world/main.go.tmpl
-    pre:
-    - go mod tidy
-    - gofmt -l -w .
   default: true
