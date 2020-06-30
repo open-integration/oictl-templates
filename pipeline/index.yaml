@@ -1,4 +1,5 @@
-name: Pipeline Repo
+name: pipeline
+description: Pipeline Repository
 items:
 - name: hello-world
   templates:
