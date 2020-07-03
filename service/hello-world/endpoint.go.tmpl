@@ -1,0 +1,22 @@
+package {{ .endpoint.name }}
+
+import (
+	"context"
+	"github.com/open-integration/core/pkg/logger"
+)
+
+type (
+	{{ .endpoint.name | strings.Title }}Options struct {
+		Context   context.Context
+		LoggerFD  string
+		Arguments *{{ .endpoint.name | strings.Title }}Arguments
+	}
+)
+
+func {{ .endpoint.name | strings.Title }}(opt {{ .endpoint.name | strings.Title }}Options) (*{{ .endpoint.name | strings.Title }}Returns, error) {
+	log := logger.New(&logger.Options{
+		FilePath: opt.LoggerFD,
+	})
+	log.Debug("dummy log output")
+	return &{{ .endpoint.name | strings.Title }}Returns{}, nil
+}
