@@ -1,0 +1,33 @@
+name: service
+description: Service Repository
+items:
+- name: hello-world
+  default: true
+  pre:
+  - go mod init {{ .metadata.name }} || true
+  post:
+  - go mod tidy
+  - gofmt -l -w .
+
+  endpoint:
+    template:
+      file: ./pkg/{{ .endpoint.name }}/endpoint.go
+      link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/endpoint.go.tmpl
+    arguments:
+      file: ./configs/endpoints/{{ .endpoint.name }}/arguments.json
+      link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/default.jsonschema.json.tmpl
+    returns:
+      file: ./configs/endpoints/{{ .endpoint.name }}/returns.json
+      link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/default.jsonschema.json.tmpl
+
+  templates:
+  - file: main.go
+    link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/main.go.tmpl
+  - file: Dockerfile
+    link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/Dockerfile.tmpl
+  - file: VERSION
+    link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/VERSION.tmpl
+  - file: Makefile
+    link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/Makefile.tmpl
+  - file: ./scripts/build.sh
+    link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/build.sh.tmpl
