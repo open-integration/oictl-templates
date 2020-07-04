@@ -12,7 +12,7 @@ items:
 
   endpoint:
     template:
-      file: ./pkg/{{ .endpoint.name }}/endpoint.go
+      file: ./pkg/endpoints/{{ .endpoint.name }}/endpoint.go
       link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/endpoint.go.tmpl
     arguments:
       file: ./configs/endpoints/{{ .endpoint.name }}/arguments.json
