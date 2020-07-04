@@ -5,6 +5,7 @@ items:
   default: true
   pre:
   - go mod init {{ .metadata.name }} || true
+  - quicktype -v
   post:
   - go mod tidy
   - gofmt -l -w .
@@ -16,9 +17,13 @@ items:
     arguments:
       file: ./configs/endpoints/{{ .endpoint.name }}/arguments.json
       link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/default.jsonschema.json.tmpl
+      post:
+      - quicktype -o pkg/endpoints/{{ .endpoint.name }}/arguments.go -l go -s schema --src {{ .endpoint.arguments }} --package {{ .endpoint.name }} -t {{ .endpoint.name | strings.Title }}Arguments
     returns:
       file: ./configs/endpoints/{{ .endpoint.name }}/returns.json
       link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/service/hello-world/default.jsonschema.json.tmpl
+      post:
+      - quicktype -o pkg/endpoints/{{ .endpoint.name }}/returns.go -l go -s schema --src {{ .endpoint.returns }} --package {{ .endpoint.name }} -t {{ .endpoint.name | strings.Title }}Returns
 
   templates:
   - file: main.go
