@@ -4,7 +4,7 @@ items:
 - name: hello-world
   default: true
   pre:
-  - go mod init {{ .name }} || true
+  - go mod init {{ .project }} || true
   - quicktype -v
   post:
   - go mod tidy
