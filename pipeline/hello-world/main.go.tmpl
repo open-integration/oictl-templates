@@ -51,7 +51,7 @@ func main() {
 
 type {{ BuildTaskRunner .name }} struct {}
 
-func(r {{ BuildTaskRunner .name }})Run() ([]byte, error) {
+func(r {{ BuildTaskRunner .name }})Run(er reporter.EventReporter) ([]byte, error) {
 	fmt.Println("*****************")
 	fmt.Println("Hello World")
 	fmt.Println("*****************")
