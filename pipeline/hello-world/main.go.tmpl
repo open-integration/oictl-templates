@@ -31,7 +31,7 @@ func main() {
 						Reaction: func(ev event.Event, state state.State) []task.Task {
                         	return []task.Task{
 								{{ range $eventReaction.reactions -}}
-								{{ BuildTaskFunction .name  }}(),
+								core.NewFunctionTask("{{ BuildTaskFunction .name  }}", Run{{ BuildTaskRunner .name }}),
 								{{ end }}
                         	}
 						},
@@ -49,22 +49,12 @@ func main() {
 {{ range $i, $eventReaction := .eventReactions }}
 {{ range $eventReaction.reactions -}}
 
-type {{ BuildTaskRunner .name }} struct {}
 
-func(r {{ BuildTaskRunner .name }})Run(er reporter.EventReporter) ([]byte, error) {
+func Run{{ BuildTaskRunner .name }}(ctx context.Context, options task.RunOptions) ([]byte, error) {
 	fmt.Println("*****************")
 	fmt.Println("Hello World")
 	fmt.Println("*****************")
 	return []byte{}, nil
-}
-
-func {{ BuildTaskFunction .name  }}() task.Task {
-	return task.Task{
-		Metadata: task.Metadata{
-			Name: "{{ $.metadata.name }}-{{ .name }}-{{ $i }}",
-		},
-		Runner: {{ BuildTaskRunner .name }}{},
-	}
 }
 
 {{ end }}
