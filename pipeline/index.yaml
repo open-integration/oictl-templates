@@ -9,5 +9,5 @@ items:
   - gofmt -l -w .
   templates:
   - file: main.go
-    link: https://raw.githubusercontent.com/open-integration/oictl-templates/69bbf61fda661256df18c6da18d4ec9fac658a58/pipeline/hello-world/main.go.tmpl
+    link: https://raw.githubusercontent.com/open-integration/oictl-templates/master/pipeline/hello-world/main.go.tmpl
   default: true
