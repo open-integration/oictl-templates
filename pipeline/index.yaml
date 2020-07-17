@@ -3,7 +3,7 @@ description: Pipeline Repository
 items:
 - name: hello-world
   pre:
-  - go mod init {{ .metadata.name }} || true
+  - go mod init {{ .Metadata.Name }} || true
   post:
   - go mod tidy
   - gofmt -l -w .
