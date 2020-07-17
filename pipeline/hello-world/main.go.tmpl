@@ -13,26 +13,26 @@ import (
 func main() {
 	pipe := core.Pipeline{
 		Metadata: core.PipelineMetadata{
-			Name: "{{ .metadata.name }}",
+			Name: "{{ .Metadata.Name }}",
 		},
 		Spec: core.PipelineSpec{
 			Services: []core.Service{
-			{{ range .services }}
+			{{ range .Services }}
 				core.Service{
-					As:      "{{ .as }}",
-					Name:    "{{ .name }}",
-					Version: "{{ .version }}",
+					As:      "{{ .As }}",
+					Name:    "{{ .Name }}",
+					Version: "{{ .Version }}",
 				},
 			{{ end }}
 			},
 			Reactions: []core.EventReaction{
-				{{ range $i, $eventReaction := .eventReactions -}}
+				{{ range $i, $eventReaction := .EventReactions -}}
 					{
-						Condition: {{ BuildCondition .condition }},
+						Condition: {{ BuildCondition .Condition }},
 						Reaction: func(ev event.Event, state state.State) []task.Task {
                         	return []task.Task{
-								{{ range $eventReaction.reactions -}}
-								core.NewFunctionTask("{{ BuildTaskFunction .name  }}", Run{{ BuildTaskRunner .name }}),
+								{{ range $eventReaction.Reactions -}}
+								core.NewFunctionTask("{{ BuildTaskFunction .Name  }}", Run{{ BuildTaskRunner .Name }}),
 								{{ end }}
                         	}
 						},
@@ -47,11 +47,11 @@ func main() {
 	core.HandleEngineError(e.Run())
 }
 
-{{ range $i, $eventReaction := .eventReactions }}
-{{ range $eventReaction.reactions -}}
+{{ range $i, $eventReaction := .EventReactions }}
+{{ range $eventReaction.Reactions -}}
 
 
-func Run{{ BuildTaskRunner .name }}(ctx context.Context, options task.RunOptions) ([]byte, error) {
+func Run{{ BuildTaskRunner .Name }}(ctx context.Context, options task.RunOptions) ([]byte, error) {
 	fmt.Println("*****************")
 	fmt.Println("Hello World")
 	fmt.Println("*****************")
